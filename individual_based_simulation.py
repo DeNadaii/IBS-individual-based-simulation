@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os as OS
 
 
-L = 50
+L = 20
 
 matrix = np.zeros((L, L))
 
@@ -71,7 +71,6 @@ def DirecaoPresa(a,b,index):
         else:
             coordenadasPresas[index] = [a,len(matrix)-1]
             
- 
 
 def gerarPresa():
     gerar_Presa_x = np.random.randint(0, L-1)
