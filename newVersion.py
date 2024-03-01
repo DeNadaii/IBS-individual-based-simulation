@@ -42,7 +42,24 @@ def popularMatriz():
         i += 1
 
 
+print("Predadores: ", coordenadasPredadores)
+print("Presas: ", coordenadasPresas)
 popularMatriz()
+print("Predadores: ", coordenadasPredadores)
+print("Presas: ", coordenadasPresas)
+
+def checaColisao():
+    count_i = 0 
+    for i in coordenadasPredadores:
+        count_j = 0
+        for j in coordenadasPresas:
+            if i == j:
+                print("engual")
+            count_j += 1
+        count_i += 1
+        
+checaColisao()
+
 
 def decidirDireçãoGeral(arrEnd):
     n = np.random.randint(0,2) 
@@ -57,10 +74,10 @@ def decidirDireçãoGeral(arrEnd):
         arrEnd[0] += delta
         
 
-count = 0
-while count < 10:
-    print("count: ", count)
-    print("BEFORE: ", coordenadasPredadores[count])
-    decidirDireçãoGeral(coordenadasPredadores[count])
-    print("AFTER: ",coordenadasPredadores[count])
-    count += 1
+# count = 0
+# while count < 10:
+#     print("count: ", count)
+#     print("BEFORE: ", coordenadasPredadores[count])
+#     decidirDireçãoGeral(coordenadasPredadores[count])
+#     print("AFTER: ",coordenadasPredadores[count])
+#     count += 1

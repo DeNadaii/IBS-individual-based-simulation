@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os as OS
 
 
-L = 20
+L = 100
 
 matrix = np.zeros((L, L))
 
