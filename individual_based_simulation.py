@@ -4,12 +4,14 @@ import matplotlib.pyplot as plt
 import os as OS
 
 
-L = 100
+L = 20
 
 matrix = np.zeros((L, L))
 
 coordenadasPredadores = []
 coordenadasPresas = []
+matrizPlotTemporalPredador = []
+matrizPlotTemporalPresa = []
 
 def DirecaoPredador(a,b,index):
     DecidirDirecao = np.random.randint(0, 3)
@@ -99,6 +101,7 @@ def gerarPredador():
 def popularMatriz():
     i = 0
     while i < 10:    
+
         gerarPresa()   
         gerarPredador() 
         i += 1
@@ -171,6 +174,8 @@ while count < 100:
     moverPresa()
     checaColisao()
     cmapmine = ListedColormap(['w','b','r'], N=3)
+    matrizPlotTemporalPredador.insert(count,len(coordenadasPredadores))
+    matrizPlotTemporalPresa.insert(count,len(coordenadasPresas))
     plt.matshow(matrix, cmap=cmapmine, vmin=0, vmax=2)
     plt.title("Frame {}".format(count))
     if count > 9:
@@ -179,8 +184,17 @@ while count < 100:
         plt.savefig("ResultadoImagens/matrix_IBS_0{}.png".format(count), bbox_inches='tight')
     count += 1
 
-print("predador",len(coordenadasPredadores))
-print("Presa",len(coordenadasPresas))
+def plotTemporalPopulacao():
+    plt.plot(matrizPlotTemporalPresa)
+    plt.ylabel('Presa')
+    plt.savefig("graficoTemporal/Presa", bbox_inches='tight')
+
+    plt.plot(matrizPlotTemporalPredador)
+    plt.ylabel('Predador')
+    plt.savefig("graficoTemporal/Predador", bbox_inches='tight')
+    
+
+plotTemporalPopulacao()
 
 
 OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
