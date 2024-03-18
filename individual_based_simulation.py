@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os as OS
 
 
-L = 20
+L = 50
 
 matrix = np.zeros((L, L))
 
@@ -184,17 +184,17 @@ while count < 100:
         plt.savefig("ResultadoImagens/matrix_IBS_0{}.png".format(count), bbox_inches='tight')
     count += 1
 
-def plotTemporalPopulacao():
-    plt.plot(matrizPlotTemporalPresa)
-    plt.ylabel('Presa')
-    plt.savefig("graficoTemporal/Presa", bbox_inches='tight')
+# def plotTemporalPopulacao():
+#     plt.plot(matrizPlotTemporalPresa)
+#     plt.ylabel('Presa')
+#     plt.savefig("graficoTemporal/Presa", bbox_inches='tight')
 
-    plt.plot(matrizPlotTemporalPredador)
-    plt.ylabel('Predador')
-    plt.savefig("graficoTemporal/Predador", bbox_inches='tight')
+#     plt.plot(matrizPlotTemporalPredador)
+#     plt.ylabel('Predador')
+#     plt.savefig("graficoTemporal/Predador", bbox_inches='tight')
     
 
-plotTemporalPopulacao()
+# plotTemporalPopulacao()
 
 
 OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
