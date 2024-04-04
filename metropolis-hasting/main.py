@@ -1,51 +1,44 @@
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
 import random
 import math
 
 pi = math.pi
 e = math.e
 
-Range = 0.5
-arrPontos = [1,6]
-Resultado_Paux = []
-Resultado_Fdp = []
+Range = 0.25
+arrPontos = [-3,3]
+Resultado_Xtil = []
 
 def Xtil(Xzero, Xfinal, X):                                     #Xtil ta em função de x
     return Xzero + (((X)*(Xfinal - Xzero)))                     #X nesse caso é 0.3, mas sempre sera aleatorio
                                                          
 
-def FDP(Xtil,Xzero):                                                                                          
-    return (1/(math.sqrt(2*pi)))*(e**(0.5*((Xtil/Xzero)**2)))                #essa FDP é um exemplo; FDP em funçao de Xtil                                   #return Xzero-(Xzero*((1-Xtil)**2))
+def FDP(Xtil):                                                                                        
+    return (1/(math.sqrt(2*pi)))*(e**(-(Xtil**2/(2*(arrPontos[0])**2))))                #essa FDP é um exemplo; FDP em funçao de Xtil                                   #return Xzero-(Xzero*((1-Xtil)**2))
     
 
-
-while True:
-    alpha = random.uniform(0.0, 2.0)
-    beta  = random.uniform(0.0, 2.0)
-    
-    Xzero  = arrPontos[0]
-    Xfinal = Xzero + Range
-    print("xzero1", Xzero)
+count = 0
+while count < 10000000:
+    alpha = random.uniform(0.0, 1.0)
+    beta  = random.uniform(0.0, 1.0)
     
     Paux = alpha                                            #Probabilidade auxiliar
     X = beta                                                #variavel independente (extocastica)
-    ResultadoFDP = FDP(Xtil(Xzero,Xfinal, X),arrPontos[0])
+    
+    ResultadoXtil = Xtil(arrPontos[0],arrPontos[1], X)
+    ResultadoFDP = FDP(ResultadoXtil)
     
     if Paux <= ResultadoFDP:
-        print("bom sorteio")
-        Resultado_Paux.append(Paux)
-        Resultado_Fdp.append(ResultadoFDP)    
-        arrPontos[0] = Xfinal
-        print("xzero2", Xzero)
+        # print("bom sorteio")
+        Resultado_Xtil.append(ResultadoXtil)
+        count +=1 
+        # print("xzero2", Xzero)
+    print(count)
     
-    if Xfinal == arrPontos[1]:
-        break
-    
-print(Resultado_Fdp)
-print(Resultado_Paux)
 
-produtos = ["produto a","produto b","produto c","produto d","produto e",]
-numero = [1,2,3,4,5]
 
-plt.plot(Resultado_Paux,Resultado_Fdp)
-plt.show()
+print("xtil",Resultado_Xtil)
+
+plt.hist(Resultado_Xtil)
+plt.show() 
