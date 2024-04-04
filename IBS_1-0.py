@@ -172,31 +172,31 @@ while count < 100:
     moverPredador()
     moverPresa()
     checaColisao()
-#    cmapmine = ListedColormap(['w','b','r'], N=3)
+    cmapmine = ListedColormap(['w','b','r'], N=3)
     matrizPlotTemporalPredador.insert(count,len(coordenadasPredadores))
     matrizPlotTemporalPresa.insert(count,len(coordenadasPresas))
-    # plt.matshow(matrix, cmap=cmapmine, vmin=0, vmax=2)
-    # plt.title("Frame {}".format(count))
-    # if count > 9:
-    #     plt.savefig("ResultadoImagens/matrix_IBS_{}.png".format(count), bbox_inches='tight')
-    # else:
-    #     plt.savefig("ResultadoImagens/matrix_IBS_0{}.png".format(count), bbox_inches='tight')
+    plt.matshow(matrix, cmap=cmapmine, vmin=0, vmax=2)
+    plt.title("Frame {}".format(count))
+    if count > 9:
+        plt.savefig("ResultadoImagens/matrix_IBS_{}.png".format(count), bbox_inches='tight')
+    else:
+        plt.savefig("ResultadoImagens/matrix_IBS_0{}.png".format(count), bbox_inches='tight')
     count += 1
 
-def plotTemporalPopulacao():
-    plt.plot(matrizPlotTemporalPresa)
-    plt.ylabel('Presa')
-    plt.xlabel('tempo')
-    plt.savefig("graficoTemporal/Presa", bbox_inches='tight')
+# def plotTemporalPopulacao():
+#     plt.plot(matrizPlotTemporalPresa)
+#     plt.ylabel('Presa')
+#     plt.xlabel('tempo')
+#     plt.savefig("graficoTemporal/Presa", bbox_inches='tight')
 
-    plt.plot(matrizPlotTemporalPredador)
-    plt.ylabel('Predador')
-    plt.savefig("graficoTemporal/Predador", bbox_inches='tight')
+#     plt.plot(matrizPlotTemporalPredador)
+#     plt.ylabel('Predador')
+#     plt.savefig("graficoTemporal/Predador", bbox_inches='tight')
     
 
-plotTemporalPopulacao()
+# plotTemporalPopulacao()
 
 
-#OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
+OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
 
 

@@ -24,7 +24,7 @@ class Predador:
     
     
 
-L = 10
+L = 50
 
 
 matrix = np.zeros((L, L))
@@ -32,26 +32,24 @@ matrix = np.zeros((L, L))
 Predadores = []
 
 def gerarPresa():
-    presa_x = np.random.randint(2,L-2)
-    presa_y = np.random.randint(2,L-2)
-    matrix[presa_x][presa_y] = 1
-    matrix[presa_x][presa_y+1] = 1
-    matrix[presa_x+1][presa_y] = 1
-    matrix[presa_x+1][presa_y+1] = 1  
+    presa_x = np.random.randint(0,L-1)
+    presa_y = np.random.randint(0,L-1)
+    matrix[presa_x][presa_y] = 2
     
 def gerarPredador():
+    IdadePredador = np.random.randint(0,4)
     predador_x = np.random.randint(0,L-1)
     predador_y = np.random.randint(0,L-1)
-    matrix[predador_x][predador_y] = 2
-    Predadores.append(Predador("M",4,[predador_x,predador_y]))
+    matrix[predador_x][predador_y] = 1
+    Predadores.append(Predador("M",IdadePredador,[predador_x,predador_y]))
 
 def popularMatriz():
     i = 0
-    while i < 5:    
+    while i < 10:    
         gerarPredador() 
         i += 1
     i = 0
-    while i <= 1:
+    while i <= 4:
         gerarPresa()
         i += 1
 
@@ -66,56 +64,47 @@ def gerarLarva(endPredador):
     
         
 
-def decidirDireçãoGeral(arrEnd, idade):
-    n = np.random.randint(0,2) 
-    p = np.random.randint(0,2)
-    
-    if matrix[arrEnd[0]][arrEnd[1]] == 1:
-        gerarLarva(arrEnd)
-        
-    if idade == 4:
-        print("pode se mover")
+def decidirDireçãoGeral(arrEnd):
+        n = np.random.randint(0,2) 
+        p = np.random.randint(0,2)
         matrix[arrEnd[0]][arrEnd[1]] = 0
         if p == 0:
-            delta = (-1)**n    
+            delta = (-1)**n
             arrEnd[1] += delta
-            if arrEnd[1] < 0 or arrEnd[1] > (L-1):
-                #print("fora da borda pela pra cima ou pra baixo")
-                if arrEnd[1] > (L-1):
-                    arrEnd[1] = 0
-                    #print("depois EIXO Y", arrEnd)
-                if arrEnd[1] < 0:
-                    arrEnd[1] = (L-1)
-                    #print("depois EIXO Y", arrEnd)
-            matrix[arrEnd[0]][arrEnd[1]] = 2
+            print("fora da borda pela pra cima ou pra baixo")
+            if arrEnd[1] > (L-1):
+                arrEnd[1] = 0
+                print("depois EIXO Y", arrEnd)
+            if arrEnd[1] < 0:
+                arrEnd[1] = (L-1)
+                print("depois EIXO Y", arrEnd)
+            matrix[arrEnd[0]][arrEnd[1]] = 1
         else:
             delta = (-1)**n
             arrEnd[0] += delta
-            if arrEnd[0] < 0 or arrEnd[0] > (L-1):
-                #print("fora da borda pelo esquerda ou direita")
-                if arrEnd[0] > (L-1):
-                    arrEnd[0] = 0
-                    #print("depois EIXO X", arrEnd)
-                if arrEnd[0] < 0:
-                    arrEnd[0] = (L-1)
-                    #print("depois EIXO X", arrEnd)
-            matrix[arrEnd[0]][arrEnd[1]] = 2
-    else:
-        print("nao pode se mover idade baixa")
-        print(arrEnd)
+            print("fora da borda pelo esquerda ou direita")
+            if arrEnd[0] > (L-1):
+                arrEnd[0] = 0
+                print("depois EIXO X", arrEnd)
+            if arrEnd[0] < 0:
+                arrEnd[0] = (L-1)
+                print("depois EIXO X", arrEnd)
+            matrix[arrEnd[0]][arrEnd[1]] = 1
         
 def moverPopulacao(ObjetoPredador):
     for i in ObjetoPredador:
-        decidirDireçãoGeral(i.getEndereco(),i.getIdade())
+        if i.getIdade() > 1:
+            decidirDireçãoGeral(i.getEndereco())
+        i.crescimentoPredador()
         
 for i in Predadores:
     print(i.getEndereco())
         
 count = 0
-while count < 20:
+while count < 50:
     moverPopulacao(Predadores)
-    cmapmine = ListedColormap(['w','b','r','g'], N=4)
-    plt.matshow(matrix, cmap=cmapmine, vmin=0, vmax=3)
+    cmapmine = ListedColormap(['w','b','r'], N=3)
+    plt.matshow(matrix, cmap=cmapmine, vmin=0, vmax=2)
     plt.title("Frame {}".format(count))
     if count > 9:
         plt.savefig("ResultadoImagens/matrix_IBS_{}.png".format(count), bbox_inches='tight')
@@ -124,11 +113,8 @@ while count < 20:
     print("count",count)
     count += 1
 
-# for i in Predadores:
-#     print("idade", i.getIdade())
-
 print(matrix)
     
-#OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
+OS.system("cd ResultadoImagens/ && convert *.png ibs.gif && rm -rf *.png")
 
 
