@@ -21,11 +21,8 @@ class Predador:
         return self.genero
     def getIdade(self):
         return self.idade
-    
-    
-
+        
 L = 50
-
 
 matrix = np.zeros((L, L))
 
