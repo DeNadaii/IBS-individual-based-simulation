@@ -28,7 +28,7 @@ Before running the project, ensure you have the following requirements installed
 
 1. Clone this repository to your local machine.
 2. Ensure that you have the required dependencies installed.
-3. Run the main program file `IBS_Main.py` which contains the IBS algorithm implementation and simulation logic.
+3. Run the main program file `IBS_3-0.py` which contains the IBS algorithm implementation and simulation logic.
 4. Observe the simulation results and analyze the behavior of individuals within the population.
 5. Modify the source code as needed to suit your specific research or experimentation requirements.
 
