@@ -24,13 +24,18 @@ def generate_Predador(numberOfIndividuals):
         IdadePredador = np.random.randint(0,4)
         x = np.random.uniform(-Dimensions,Dimensions)
         y = np.random.uniform(-Dimensions,Dimensions)
-        predadores.append(Predador("M",IdadePredador,[x,y]))
+        gender = np.random.randint(0,1)
+        if gender == 1:
+            gender = "M"
+        else:
+            gender = "F"
+        predadores.append(Predador(gender,IdadePredador,[x,y]))
 
 # Função decidir direção individuo 
 def decide_direction(mov_max,mov_min):
     rlan = np.random.uniform(mov_min, mov_max)  #alcançe de movimento do individuo 
     theta = np.random.uniform(0, 2 * np.pi)
-    return rlan * np.cos(theta), rlan * np.sin(theta) # Coordenada x e ya partir do centro
+    return rlan * np.cos(theta), rlan * np.sin(theta) # Coordenada x e y a partir do centro
 
 # Função mover individuo 
 def move_individual(arrayIndividual,mov_max,mov_min):
@@ -48,16 +53,17 @@ def check_colision(predador, presas, rp):
     return False   
 
 #set the number of individuals
-generate_Predador(10)
+generate_Predador(20)
 generate_Presa(4)
 
 
 count = 0
-while count < 25:
+while count < 50:
     # Plotagem do resultado
     move_individual(predadores,0.5,1.0)
-    if check_colision(predadores,presas,3):
-        print(count)
+    for i in predadores:
+        print(count,check_colision(predadores,presas,0.5))
+        i.crescimento_predador()
     fig = plt.figure(figsize=(10, 10))
     ax1 = fig.add_subplot(111)
     ax1.scatter([predador.coordenada[0] for predador in predadores], [predador.coordenada[1] for predador in predadores], s=50, c='b')
@@ -72,5 +78,6 @@ while count < 25:
     else:
         plt.savefig("matrix_IBS_0{}.png".format(count), bbox_inches='tight')
     count += 1
+    
     
 OS.system("convert *.png ibs.gif && rm -rf *.png")
