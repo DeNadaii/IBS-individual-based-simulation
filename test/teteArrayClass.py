@@ -1,8 +1,17 @@
 from Predador import Predador
+import numpy as np
 
-Pred1 = Predador("m",0,[1,5])
-Pred2 = Predador("m",0,[2,8])
-Pred3 = Predador("m",0,[3,7])
+Pred0 = Predador("m",0,[1,5])
+Pred1 = Predador("m",0,[2,8])
+Pred2 = Predador("m",0,[1,5])
+Pred3 = Predador("m",0,[2,8])
+
+objetos = [Pred0,Pred1,Pred2,Pred3]
+
+def add_Predador():
+    x = np.random.randint(-5,5)
+    y = np.random.randint(-5,5)
+    objetos.append(Predador("m",0,[x,y]))    
 
 # Exemplo de array de objetos
 # objetos = [
@@ -11,13 +20,12 @@ Pred3 = Predador("m",0,[3,7])
 #     {'id': 3, 'valores': [10, 30]},
 # ]
 
-objetos = [Pred1,Pred2,Pred3]
-
 # Percorrer o array e comparar os atributos 'valores'
 for i in range(len(objetos)):
     for j in range(i + 1, len(objetos)):  # Inicia j a partir de i + 1
         valor_i = objetos[i].coordenada
         valor_j = objetos[j].coordenada
+        if valor_i == valor_j:
+            add_Predador()
         
-        # Comparar os dois arrays de valores
-        print(f'Comparando {valor_i} com {valor_j}')
+        

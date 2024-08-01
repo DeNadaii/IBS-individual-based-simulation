@@ -53,28 +53,28 @@ def check_colision_Presa(predador, presas, rp):
     return False   
 
 # Função para checar colisao entre predadores
-def check_colision_Predador(predador):
+def check_colision_Predador(predador,rp):
     for i in range(len(predador)):
         for j in range(i + 1, len(predador)): 
             valor_i = predador[i].coordenada
             valor_j = predador[j].coordenada
-            print(valor_i,valor_j)
+            if np.sqrt((valor_i[0] - valor_j[0])**2 + (valor_i[0] - valor_j[0])**2) <= rp:
+                print(valor_i,valor_j)
+                return True
+            
 
 #set the number of individuals
-generate_Predador(20)
-generate_Presa(4)
+generate_Predador(10)
+generate_Presa(0)
 
-print(len(predadores))
+
 count = 0
 while count < 50:
     # Plotagem do resultado
     move_individual(predadores,0.5,1.0)
     for i in predadores:
-        if check_colision_Presa(predadores,presas,0.5):
-            print("colide")
-        print(check_colision_Predador(predadores))
+        print(count,check_colision_Predador(predadores,1.0))
         i.crescimento_predador()
-    print(len(predadores))
     fig = plt.figure(figsize=(10, 10))
     ax1 = fig.add_subplot(111)
     ax1.scatter([predador.coordenada[0] for predador in predadores], [predador.coordenada[1] for predador in predadores], s=50, c='b')
@@ -90,6 +90,6 @@ while count < 50:
         plt.savefig("matrix_IBS_0{}.png".format(count), bbox_inches='tight')
     count += 1
     
-print(len(predadores))
+
     
 OS.system("convert *.png ibs.gif && rm -rf *.png")
