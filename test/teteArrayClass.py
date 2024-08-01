@@ -20,6 +20,10 @@ def add_Predador():
 #     {'id': 3, 'valores': [10, 30]},
 # ]
 
+print(len(objetos))
+add_Predador()
+print(len(objetos))
+
 # Percorrer o array e comparar os atributos 'valores'
 for i in range(len(objetos)):
     for j in range(i + 1, len(objetos)):  # Inicia j a partir de i + 1
@@ -27,5 +31,8 @@ for i in range(len(objetos)):
         valor_j = objetos[j].coordenada
         if valor_i == valor_j:
             add_Predador()
+            
+print(len(objetos))
+
         
         
