@@ -4,9 +4,9 @@ import numpy as np
 Pred0 = Predador("m",0,[1,5])
 Pred1 = Predador("m",0,[2,8])
 Pred2 = Predador("m",0,[1,5])
-Pred3 = Predador("m",0,[2,8])
 
-objetos = [Pred0,Pred1,Pred2,Pred3]
+
+objetos = [Pred0,Pred1,Pred2]
 
 def add_Predador():
     x = np.random.randint(-5,5)
@@ -30,9 +30,13 @@ for i in range(len(objetos)):
         valor_i = objetos[i].coordenada
         valor_j = objetos[j].coordenada
         if valor_i == valor_j:
+            print()
             add_Predador()
+            True
             
-print(len(objetos))
+
+for i in objetos:
+    print(i.coordenada)
 
         
         

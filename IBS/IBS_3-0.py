@@ -21,10 +21,10 @@ def generate_Presa(numberOfIndividuals):
 #criando Predador
 def generate_Predador(numberOfIndividuals):
     for i in range(numberOfIndividuals):
-        IdadePredador = np.random.randint(0,4)
+        IdadePredador = 1
         x = np.random.uniform(-Dimensions,Dimensions)
         y = np.random.uniform(-Dimensions,Dimensions)
-        gender = np.random.randint(0,1)
+        gender = np.random.randint(1,3)
         if gender == 1:
             gender = "M"
         else:
@@ -53,18 +53,22 @@ def check_colision_Presa(predador, presas, rp):
     return False   
 
 # Função para checar colisao entre predadores
-def check_colision_Predador(predador,rp):
+def check_colision_Predador(predador,rp): #rp define a distancia de aproximação para o acasalamento
     for i in range(len(predador)):
         for j in range(i + 1, len(predador)): 
             valor_i = predador[i].coordenada
             valor_j = predador[j].coordenada
-            if np.sqrt((valor_i[0] - valor_j[0])**2 + (valor_i[0] - valor_j[0])**2) <= rp:
-                print(valor_i,valor_j)
+            sexo_i = predador[i].genero
+            sexo_j = predador[j].genero
+            idade_i = predador[i].idade
+            idade_j = predador[j].idade
+            if np.sqrt((valor_i[0] - valor_j[0])**2 + (valor_i[0] - valor_j[0])**2) <= rp and sexo_i != sexo_j and idade_i != idade_j:
+                generate_Predador(1)
                 return True
             
 
 #set the number of individuals
-generate_Predador(10)
+generate_Predador(5)
 generate_Presa(0)
 
 
@@ -72,8 +76,8 @@ count = 0
 while count < 50:
     # Plotagem do resultado
     move_individual(predadores,0.5,1.0)
+    print(count,check_colision_Predador(predadores,0.1))
     for i in predadores:
-        print(count,check_colision_Predador(predadores,1.0))
         i.crescimento_predador()
     fig = plt.figure(figsize=(10, 10))
     ax1 = fig.add_subplot(111)
