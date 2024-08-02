@@ -6,6 +6,11 @@ class Predador:
     def crescimento_predador(self):
         if self.idade < 4:
             self.idade += 1
+    def apto_a_procriar(self):
+        if self.idade == 4:
+            return True
+        else:
+            return False
     @property
     def coordenada(self):
         return self.coordenada
