@@ -6,7 +6,9 @@ class Predador:
         self.procriar = False
         self.morte = False
         self.move = True
+        self.is_copulating = False 
         self.on_prey = on_prey
+        self.days_of_copule = 0
     def crescimento_predador(self):
         if self.idade <= 20:
             self.idade += 1
@@ -17,10 +19,14 @@ class Predador:
         if self.idade > 20:
             self.morte = True
     def can_move(self):
-        if self.on_prey or self.idade < 5:
+        if self.idade < 5:
             self.move = False
-    def already_copulate(self):
-        return 0
+    def copulating(self):
+        if self.procriar and self.on_prey:
+            self.move = False
+            self.is_copulating = True
+            self.days_of_copule += 1
+                
         
     
         

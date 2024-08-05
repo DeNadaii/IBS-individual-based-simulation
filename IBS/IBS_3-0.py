@@ -78,7 +78,8 @@ def death_control(arrPredadores):
 def check_colision_prey(predador, preys, rp):
         for i in range(len(preys)):
             for j in range(i + 1, len(predador)):
-                if np.sqrt((preys[i].coordenates[0] - predador[j].coordenada[0])**2 + (preys[i].coordenates[1] - predador[j].coordenada[1])**2) <= rp:
+                print(predador[j].is_copulating)
+                if np.sqrt((preys[i].coordenates[0] - predador[j].coordenada[0])**2 + (preys[i].coordenates[1] - predador[j].coordenada[1])**2) <= rp and predador[j].is_copulating:
                     predador[j].on_prey = True
                     preys[i].predators.append([predador[j].coordenada])
 
