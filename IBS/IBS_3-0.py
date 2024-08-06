@@ -66,7 +66,6 @@ def death_control(arrPredadores):
         if arrPredadores[i].morte == True:
             arrPredadores.pop(i)
 
-
 # # Função para checar colisao
 # def check_colision_prey(predador, preys, rp): 
 #     for i in predador:
@@ -78,10 +77,10 @@ def death_control(arrPredadores):
 def check_colision_prey(predador, preys, rp):
         for i in range(len(preys)):
             for j in range(i + 1, len(predador)):
-                print(predador[j].is_copulating)
-                if np.sqrt((preys[i].coordenates[0] - predador[j].coordenada[0])**2 + (preys[i].coordenates[1] - predador[j].coordenada[1])**2) <= rp and predador[j].is_copulating:
+                # print(predador[j].is_copulating)
+                if np.sqrt((preys[i].coordenates[0] - predador[j].coordenada[0])**2 + (preys[i].coordenates[1] - predador[j].coordenada[1])**2) <= rp:
                     predador[j].on_prey = True
-                    preys[i].predators.append([predador[j].coordenada])
+                    preys[i].predators.append([predador[j]])
 
 # Função para checar colisao entre predadores
 def check_colision_Predador(predador,rp): #rp define a distancia de aproximação para o acasalamento
@@ -104,6 +103,12 @@ def check_colision_Predador(predador,rp): #rp define a distancia de aproximaçã
                     generate_Spawn(valor_j)
                     #print(valor_j)
 
+def copule(preys):
+    for i in preys:
+        print(i.predators)
+        for j in i.predators:
+            print("ok")
+    
 
 #set the number of individuals
 generate_Predador(30)
@@ -116,6 +121,7 @@ while count < 50:
     check_colision_Predador(predadores,0.5)
     #death_control(predadores)
     check_colision_prey(predadores, preys, 1.0)
+    copule(preys)
     for i in predadores:
         #print(i.idade)
         i.crescimento_predador()

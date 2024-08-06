@@ -1,4 +1,4 @@
 class Prey:
-    def __init__(self,coordenates,predators):
+    def __init__(self,coordenates):
         self.coornates = coordenates
-        self.predators = predators
+        self.predators = []

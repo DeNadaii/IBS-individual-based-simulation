@@ -19,13 +19,15 @@ class Predador:
         if self.idade > 20:
             self.morte = True
     def can_move(self):
-        if self.idade < 5:
+        if self.idade < 5 and self.on_prey:
             self.move = False
     def copulating(self):
         if self.procriar and self.on_prey:
             self.move = False
             self.is_copulating = True
             self.days_of_copule += 1
+    def test():
+        print("print test")
                 
         
     
